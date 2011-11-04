@@ -24,7 +24,7 @@ action :enable do
     user "root"
   end
 
-  template "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
+  template "#{node['supervisor']['dir']}/#{new_resource.program_name}.conf" do
     source "program.conf.erb"
     cookbook "supervisor"
     owner "root"
@@ -41,32 +41,32 @@ action :disable do
     user "root"
   end
 
-  file "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
+  file "#{node['supervisor']['dir']}/#{new_resource.program_name}.conf" do
     action :delete
     notifies :run, resources(:execute => "supervisorctl update"), :immediately
   end
 end
 
 action :start do
-  execute "supervisorctl start #{new_resource.service_name}" do
+  execute "supervisorctl start #{new_resource.program_name}" do
     user "root"
   end
 end
 
 action :stop do
-  execute "supervisorctl stop #{new_resource.service_name}" do
+  execute "supervisorctl stop #{new_resource.program_name}" do
     user "root"
   end
 end
 
 action :restart  do
-  execute "supervisorctl restart #{new_resource.service_name}" do
+  execute "supervisorctl restart #{new_resource.program_name}" do
     user "root"
   end
 end
 
 action :reload  do
-  execute "supervisorctl restart #{new_resource.service_name}" do
+  execute "supervisorctl restart #{new_resource.program_name}" do
     user "root"
   end
 end

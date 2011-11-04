@@ -25,7 +25,7 @@ def initialize(*args)
   @action = [:enable, :start]
 end
 
-attribute :service_name, :kind_of => String, :name_attribute => true
+attribute :program_name, :kind_of => String, :name_attribute => true
 attribute :command, :kind_of => String
 attribute :process_name, :kind_of => String, :default => '%(program_name)s'
 attribute :numprocs, :kind_of => Integer, :default => 1
