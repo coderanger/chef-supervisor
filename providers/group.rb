@@ -1,9 +1,9 @@
 #
-# Author:: Noah Kantrowitz <noah@opscode.com>
+# Author:: Gilles Devaux <gilles.devaux@gmail.com>
 # Cookbook Name:: supervisor
-# Provider:: service
+# Provider:: group
 #
-# Copyright:: 2011, Opscode, Inc <legal@opscode.com>
+# Copyright:: 2011, Formspring.me
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ action :enable do
     user "root"
   end
 
-  template "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
-    source "program.conf.erb"
+  template "#{node['supervisor']['dir']}/#{new_resource.group_name}.conf" do
+    source "group.conf.erb"
     cookbook "supervisor"
     owner "root"
     group "root"
@@ -41,32 +41,32 @@ action :disable do
     user "root"
   end
 
-  file "#{node['supervisor']['dir']}/#{new_resource.service_name}.conf" do
+  file "#{node['supervisor']['dir']}/#{new_resource.group_name}.conf" do
     action :delete
     notifies :run, resources(:execute => "supervisorctl update"), :immediately
   end
 end
 
 action :start do
-  execute "supervisorctl start #{new_resource.service_name}" do
+  execute "supervisorctl start #{new_resource.group_name}" do
     user "root"
   end
 end
 
 action :stop do
-  execute "supervisorctl stop #{new_resource.service_name}" do
+  execute "supervisorctl stop #{new_resource.group_name}" do
     user "root"
   end
 end
 
 action :restart  do
-  execute "supervisorctl restart #{new_resource.service_name}" do
+  execute "supervisorctl restart #{new_resource.group_name}" do
     user "root"
   end
 end
 
 action :reload  do
-  execute "supervisorctl restart #{new_resource.service_name}" do
+  execute "supervisorctl restart #{new_resource.group_name}" do
     user "root"
   end
 end

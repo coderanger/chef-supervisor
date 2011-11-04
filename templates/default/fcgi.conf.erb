@@ -1,5 +1,6 @@
-[program:<%= @prog.program_name %>]
+[fcgi-program:<%= @prog.program_name %>]
 command=<%= @prog.command %>
+socket=<%= @prog.socket %>
 process_name=<%= @prog.process_name %>
 numprocs=<%= @prog.numprocs %>
 numprocs_start=<%= @prog.numprocs_start %>
@@ -34,3 +35,9 @@ directory=<%= @prog.directory %>
 umask=<%= @prog.umask %>
 <% end %>
 serverurl=<%= @prog.serverurl %>
+<% if @prog.socket_owner %>
+socket_owner=<%= @prog.socket_owner %>
+<% end %>
+<% if @prog.socket_mode %>
+socket_mode=<%= @prog.socket_mode %>
+<% end %>

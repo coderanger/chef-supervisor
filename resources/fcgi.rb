@@ -1,9 +1,9 @@
 #
-# Author:: Noah Kantrowitz <noah@opscode.com>
+# Author:: Gilles Devaux <gilles.devaux@gmail.com>
 # Cookbook Name:: supervisor
-# Resource:: service
+# Resource:: fcgi
 #
-# Copyright:: 2011, Opscode, Inc <legal@opscode.com>
+# Copyright:: 2011, Formspring.me
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ def initialize(*args)
   @action = [:enable, :start]
 end
 
-attribute :service_name, :kind_of => String, :name_attribute => true
+attribute :program_name, :kind_of => String, :name_attribute => true
 attribute :command, :kind_of => String
 attribute :process_name, :kind_of => String, :default => '%(program_name)s'
 attribute :numprocs, :kind_of => Integer, :default => 1
@@ -54,3 +54,6 @@ attribute :environment, :kind_of => Hash, :default => {}
 attribute :directory, :kind_of => [String, NilClass], :default => nil
 attribute :umask, :kind_of => [NilClass, String], :default => nil
 attribute :serverurl, :kind_of => String, :default => 'AUTO'
+attribute :socket, :kind_of => String, :required => true
+attribute :socket_owner, :kind_of => String, :default => nil
+attribute :socket_mode, :kind_of => String, :required => '0700'
